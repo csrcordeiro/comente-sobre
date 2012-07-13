@@ -7,19 +7,27 @@ import javax.persistence.NoResultException;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.comentesobre.daos.ComentarioDao;
 import br.com.comentesobre.daos.TemaDao;
+import br.com.comentesobre.daos.UsuarioDao;
 import br.com.comentesobre.model.Comentario;
 import br.com.comentesobre.model.Tema;
+import br.com.comentesobre.model.Usuario;
 
 @Resource
 public class ComentarioController {
 
     private final Result result;
     private final TemaDao temaDao;
+    private final UsuarioDao usuarioDao;
+    private final ComentarioDao comentarioDao;
 
-    public ComentarioController(Result result, TemaDao temaDao) {
+    public ComentarioController(Result result, TemaDao temaDao,
+            ComentarioDao comentarioDao, UsuarioDao usuarioDao) {
         this.result = result;
         this.temaDao = temaDao;
+        this.comentarioDao = comentarioDao;
+        this.usuarioDao = usuarioDao;
     }
 
     @Path("/")
@@ -27,30 +35,40 @@ public class ComentarioController {
     }
 
     public void escolher(Tema tema) {
-        String titulo = tema.tratarTituloParaUri();
-        tema.setTitulo(titulo);
+        String uri = tema.tratarTituloParaUri();
+        tema.setUri(uri);
 
         try {
-            tema = temaDao.getTemaPorTitulo(tema.getTitulo());
-        }catch (NoResultException e) {
-            //Caso não haja resultado, um novo tema será cadastrado.
+            tema = temaDao.getTemaPorUri(uri);
+        } catch (NoResultException e) {
+            // Caso não haja resultado, um novo tema será cadastrado.
             temaDao.persist(tema);
         }
 
-        result.redirectTo(this).novoComentario(titulo,tema);
+        result.redirectTo(this).novoComentario(tema);
     }
 
-    @Path("/{titulo}")
-    public void novoComentario(String titulo, Tema tema) {
+    @Path("/{tema.uri}")
+    public Tema novoComentario(Tema tema) {
+        return tema;
     }
 
-    public void comentar(Comentario comentario) {
-        // TODO: lógica de comentario.
+    public void comentar(Tema tema, Usuario usuario, Comentario comentario) {
+        try{
+            usuario = usuarioDao.getUsuarioPorEmail(usuario.getEmail());
+        }catch (NoResultException e) {
+            // Se não há um usuário com este email, um novo será criado.
+            usuarioDao.persist(usuario);
+        }
 
-        result.forwardTo(this).listar();
+        comentario.setDono(usuario);
+        comentario.setTema(tema);
+
+        comentarioDao.persist(comentario);
+        result.redirectTo(this).listar(tema);
     }
 
-    public List<Comentario> listar() {
+    public List<Comentario> listar(Tema tema) {
         return null;
     }
 }

@@ -17,6 +17,8 @@ public class Tema extends NormalEntity {
 
     private String titulo;
 
+    private String uri;
+
     public Collection<Comentario> getComentariosSobre() {
         return comentariosSobre;
     }
@@ -31,6 +33,14 @@ public class Tema extends NormalEntity {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String tratarTituloParaUri() {
