@@ -4,9 +4,13 @@ import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-public class Tema extends NormalEntity{
+@Table(name="Tema",
+       uniqueConstraints=@UniqueConstraint(columnNames = { "titulo" }))
+public class Tema extends NormalEntity {
 
     @OneToMany
     private Collection<Comentario> comentariosSobre;
@@ -27,5 +31,19 @@ public class Tema extends NormalEntity{
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String tratarTituloParaUri() {
+        if(titulo == null) {
+            return null;
+        }
+
+        String uri = titulo.toLowerCase();
+
+        uri = uri.replaceAll("[ãâàáä]", "a").replaceAll("[êèéë]", "e")
+                .replaceAll("[îìíï]", "i").replaceAll("[õôòóö]", "o")
+                .replaceAll("[ûúùü]", "u").replaceAll(" ", "-");
+
+        return uri;
     }
 }
