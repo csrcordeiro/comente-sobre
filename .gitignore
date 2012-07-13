@@ -1,0 +1,13 @@
+# Arquivos a serem ignorados.
+
+*.class
+*.jar
+*~
+
+# Arquivos do eclipse.
+.settings/
+.project
+.classpath
+
+# Arquivos de build.
+target/
