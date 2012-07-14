@@ -9,7 +9,7 @@
 	<title>Seja bem vindo ao comente aqui!</title>
 </head>
 <body>
-	<form action="comentario/escolher" method="post" accept-charset="UTF-8">
+	<form action="tema/escolher" method="post" accept-charset="UTF-8">
 	   <fieldset>
 	      <legend>Sobre o que quer comentar?</legend>
 

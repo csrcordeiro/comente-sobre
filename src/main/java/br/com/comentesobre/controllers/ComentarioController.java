@@ -8,67 +8,54 @@ import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.comentesobre.daos.ComentarioDao;
-import br.com.comentesobre.daos.TemaDao;
 import br.com.comentesobre.daos.UsuarioDao;
 import br.com.comentesobre.model.Comentario;
 import br.com.comentesobre.model.Tema;
 import br.com.comentesobre.model.Usuario;
+import br.com.comentesobre.session.UsuarioSessao;
 
 @Resource
 public class ComentarioController {
 
     private final Result result;
-    private final TemaDao temaDao;
     private final UsuarioDao usuarioDao;
     private final ComentarioDao comentarioDao;
+    private final UsuarioSessao usuarioSessao;
 
-    public ComentarioController(Result result, TemaDao temaDao,
-            ComentarioDao comentarioDao, UsuarioDao usuarioDao) {
+    public ComentarioController(Result result, ComentarioDao comentarioDao,
+            UsuarioDao usuarioDao, UsuarioSessao usuarioSessao) {
         this.result = result;
-        this.temaDao = temaDao;
         this.comentarioDao = comentarioDao;
         this.usuarioDao = usuarioDao;
+        this.usuarioSessao = usuarioSessao;
     }
 
     @Path("/")
     public void home() {
     }
 
-    public void escolher(Tema tema) {
-        String uri = tema.tratarTituloParaUri();
-        tema.setUri(uri);
-
-        try {
-            tema = temaDao.getTemaPorUri(uri);
-        } catch (NoResultException e) {
-            // Caso não haja resultado, um novo tema será cadastrado.
-            temaDao.persist(tema);
-        }
-
-        result.redirectTo(this).novoComentario(tema);
-    }
-
-    @Path("/{tema.uri}")
+    @Path("/{tema.uri}/")
     public Tema novoComentario(Tema tema) {
         return tema;
     }
 
-    public void comentar(Tema tema, Usuario usuario, Comentario comentario) {
-        try{
+    @Path("/{tema.uri}/listar")
+    public void comentar(Usuario usuario, Comentario comentario) {
+        try {
             usuario = usuarioDao.getUsuarioPorEmail(usuario.getEmail());
-        }catch (NoResultException e) {
+        } catch (NoResultException e) {
             // Se não há um usuário com este email, um novo será criado.
             usuarioDao.persist(usuario);
         }
 
         comentario.setDono(usuario);
-        comentario.setTema(tema);
+        comentario.setTema(usuarioSessao.getTema());
 
         comentarioDao.persist(comentario);
-        result.redirectTo(this).listar(tema);
+        result.forwardTo(this).listar();
     }
 
-    public List<Comentario> listar(Tema tema) {
-        return null;
+    public List<Comentario> listar() {
+        return comentarioDao.getComentariosDoTema(usuarioSessao.getTema());
     }
 }
