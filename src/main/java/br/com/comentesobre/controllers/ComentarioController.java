@@ -1,5 +1,6 @@
 package br.com.comentesobre.controllers;
 
+
 import java.util.List;
 
 import br.com.caelum.vraptor.Path;
@@ -7,6 +8,7 @@ import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
+import br.com.comentesobre.interceptadores.Restrito;
 import br.com.comentesobre.logica.ComentarioLogica;
 import br.com.comentesobre.model.Comentario;
 import br.com.comentesobre.model.Tema;
@@ -35,6 +37,7 @@ public class ComentarioController {
     }
 
     @Path("/{tema.uri}/comentar")
+    @Restrito
     public void comentar(Usuario usuario, Comentario comentario) {
         if(usuario == null || usuario.getEmail() == null || usuario.getEmail().isEmpty()){
             validador.add(
@@ -55,6 +58,7 @@ public class ComentarioController {
     }
 
     @Path("/lista")
+    @Restrito
     public List<Comentario> listar() {
         return comentarioLogica.getComentariosDeTemaEscolhido();
     }

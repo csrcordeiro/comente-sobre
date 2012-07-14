@@ -5,7 +5,6 @@ import java.io.Serializable;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.SessionScoped;
 import br.com.comentesobre.model.Tema;
-import br.com.comentesobre.model.Usuario;
 
 /**
  * <p>
@@ -20,8 +19,6 @@ public class UsuarioSessao implements Serializable{
 
     private Tema tema;
 
-    private Usuario usuario;
-
     public Tema getTema() {
         return tema;
     }
@@ -30,11 +27,10 @@ public class UsuarioSessao implements Serializable{
         this.tema = tema;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public boolean hasTema(){
+        if(tema == null){
+            return false;
+        }
+        return true;
     }
 }
