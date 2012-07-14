@@ -8,6 +8,7 @@ import br.com.caelum.vraptor.ioc.Component;
 import br.com.comentesobre.daos.ComentarioDao;
 import br.com.comentesobre.daos.UsuarioDao;
 import br.com.comentesobre.model.Comentario;
+import br.com.comentesobre.model.Tema;
 import br.com.comentesobre.model.Usuario;
 import br.com.comentesobre.session.UsuarioSessao;
 
@@ -45,4 +46,7 @@ public class ComentarioLogica {
         return comentarioDao.getComentariosDoTema(usuarioSessao.getTema());
     }
 
+    public Tema getTemaAtualParaNovoComentario(){
+        return usuarioSessao.getTema();
+    }
 }
