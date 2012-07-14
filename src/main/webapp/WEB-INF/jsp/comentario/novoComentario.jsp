@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>O que vc pensa sobre ${tema.titulo} ?</h1>
-	<form method="post" action="<c:url value="listar" />">
+	<form method="get" action="<c:url value="comentar" />">
 		<fieldset>
 			<p>
 				<label for="email">Seu Email: </label>

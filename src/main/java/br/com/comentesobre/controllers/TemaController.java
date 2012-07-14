@@ -1,38 +1,26 @@
 package br.com.comentesobre.controllers;
 
-import javax.persistence.NoResultException;
-
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.comentesobre.daos.TemaDao;
+import br.com.comentesobre.logica.TemaLogica;
 import br.com.comentesobre.model.Tema;
-import br.com.comentesobre.session.UsuarioSessao;
 
 @Resource
 public class TemaController {
 
     private final Result result;
-    private final TemaDao temaDao;
-    private final UsuarioSessao usuarioSessao;
 
-    public TemaController(Result result, TemaDao temaDao, UsuarioSessao usuarioSessao) {
+    private final TemaLogica temaLogica;
+
+    public TemaController(Result result, TemaLogica temaLogica) {
         this.result = result;
-        this.temaDao = temaDao;
-        this.usuarioSessao = usuarioSessao;
+        this.temaLogica = temaLogica;
     }
 
     public void escolher(Tema tema) {
-        String uri = tema.tratarTituloParaUri();
-        tema.setUri(uri);
+        //TODO: Criar validadores.
 
-        try {
-            tema = temaDao.getTemaPorUri(uri);
-        } catch (NoResultException e) {
-            // Caso não haja resultado, um novo tema será cadastrado.
-            temaDao.persist(tema);
-        }
-
-        usuarioSessao.setTema(tema);
+        temaLogica.escolher(tema);
 
         result.redirectTo(ComentarioController.class).novoComentario(tema);
     }
