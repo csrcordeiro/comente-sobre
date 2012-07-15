@@ -31,9 +31,10 @@ public class ComentarioController {
     public void home() {
     }
 
-    @Path("/{tema.uri}/")
-    public Tema novoComentario(Tema tema) {
-        return tema;
+    @Path("/{uri}/")
+    @Restrito
+    public Tema novoComentario(String uri) {
+        return comentarioLogica.getTemaAtualParaNovoComentario();
     }
 
     @Path("/{tema.uri}/comentar")
@@ -50,7 +51,7 @@ public class ComentarioController {
                     );
         }
 
-        validador.onErrorRedirectTo(this).novoComentario(comentarioLogica.getTemaAtualParaNovoComentario());
+        validador.onErrorRedirectTo(this).novoComentario(comentarioLogica.getTemaAtualParaNovoComentario().getUri());
 
         comentarioLogica.comentar(usuario, comentario);
 

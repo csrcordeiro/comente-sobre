@@ -25,7 +25,7 @@ public class TemaController {
     public void escolher(Tema tema) {
         if(tema == null || tema.getTitulo() == null || tema.getTitulo().isEmpty()){
             validador.add(
-                    new ValidationMessage("Por favor escolha um tema.", "")
+                    new ValidationMessage("Por favor, escolha um tema.", "")
                     );
         }
 
@@ -33,7 +33,7 @@ public class TemaController {
 
         temaLogica.escolher(tema);
 
-        result.redirectTo(ComentarioController.class).novoComentario(tema);
+        result.redirectTo(ComentarioController.class).novoComentario(tema.getUri());
     }
 
 }

@@ -30,5 +30,4 @@ public class TemaInterceptador implements Interceptor{
         // Se não há tema não pode continuar.
         return !usuarioSessao.hasTema() && method.containsAnnotation(Restrito.class);
     }
-
 }

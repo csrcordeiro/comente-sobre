@@ -5,23 +5,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="<c:url value="/css/commons.css" />" rel="stylesheet"
+	type="text/css" media="screen" />
+<script src="<c:url value="/js/jquery.js" />" type="text/javascript"></script>
+	<script src="<c:url value="/js/commons.js" />" type="text/javascript"></script>
 <title>Escreva seu comentario!</title>
 </head>
 <body>
-	<h1>O que vc pensa sobre ${tema.titulo} ?</h1>
-	<form method="get" action="<c:url value="comentar" />">
+	<div class="conteudo">
+	<form method="get" action="<c:url value="comentar" />" class="painel_comentario">
 		<fieldset>
+			<legend>O que você pensa sobre ${tema.titulo} ?</legend>
 			<p>
 				<label for="email">Seu Email: </label>
-				<input type="text" id="email" name="usuario.email"/>
+				<input type="text" id="email" name="usuario.email" class="formulario"/>
 			</p>
 			<p>
 				<label for="comentario">Faça seu comentario!</label><br/>
-				<textarea id="comentario" name="comentario.conteudo"></textarea>
+				<textarea id="comentario" name="comentario.conteudo" class="formulario"></textarea>
 			</p>
-			<input type="hidden" name="tema.id" value="${tema.id}"/>
-			<button>Comentar</button>
+			<input type="button" value="comentar" class="go go_comentario" />
 		</fieldset>
+		
+		<c:if test="${!empty errors}" >
+			<div class="erro">
+				<c:forEach items="${errors}" var="erro">
+					${erro.message}<br>
+				</c:forEach>
+			</div>
+		</c:if>
 	</form>
+	</div>
 </body>
 </html>

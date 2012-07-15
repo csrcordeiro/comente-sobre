@@ -59,6 +59,7 @@ public class ComentarioControllerTest {
     @Test
     public void deveRedirecionarParaActionDeListarComentarios() {
         when(result.redirectTo(controller)).thenReturn(controller);
+        when(comentarioLogica.getTemaAtualParaNovoComentario()).thenReturn(temaParaTeste);
 
         controller.comentar(usuarioParaComentar, comentario);
 

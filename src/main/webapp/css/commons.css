@@ -1,0 +1,201 @@
+/* CSS Reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td { 
+    margin:0;
+    padding:0;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+fieldset,img { 
+    border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+    font-style:normal;
+    font-weight:normal;
+}
+ol,ul {
+    list-style:none;
+}
+caption,th {
+    text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-size:100%;
+    font-weight:normal;
+}
+q:before,q:after {
+    content:'';
+}
+abbr,acronym { border:0;
+	     }
+
+/* Fim do reset. */
+/* Commons */
+body{
+    font-family: "Arial", "Helvetica", sans-serif;
+    background: url("bg-blue-fabric.png") repeat scroll 0 0 transparent;
+}
+
+.wrapper {
+    width: 920px;
+}
+
+.conteudo {
+    width: 960px;
+    margin: 0 auto;
+}
+
+fieldset {
+    width: auto;
+}
+
+/* Fim do Commons */
+/* Inicio da página de home. */
+.painel,
+.painel_comentario {
+    font-family: "museo-slab-1","museo-slab-2", serif;
+    position: relative;
+    top: 300px;
+}
+
+fieldset legend{
+    margin:10px 0;
+    font-weight: bold;
+    font-size: 40px;
+    color: #E9E8E3;
+}
+
+fieldset input[type=text],
+textarea {
+    background: silver;
+    width: 500px;
+    margin: 0 80px;
+    padding: 10px;
+    font-size: 30px;
+    font-weight: bold;
+    border: solid 1px #000066;
+    border-radius: 5px 5px 5px 5px;
+}
+
+fieldset input[type=text]:focus,
+textarea:focus {
+    background: -moz-linear-gradient(top,#FFFFFF,#EEEEEE 1px, #FFFFFF 25px);
+    -moz-box-shadow: rgba(0,0,0, 0.5) 0 0 8px;
+    padding:10px 12px;
+}
+
+.go {
+    position: absolute;
+    left: 300px;
+    top: 150px;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 5px 5px 5px;
+    padding: 10px;
+    background-color: #4F8A10;
+    border: solid 1px #4F8A10;
+    color: #DFF2BF;
+
+}
+
+.go:hover{
+    background-color: #DFF2BF;
+    border: solid 1px #DFF2BF;
+    color: #4F8A10;
+}
+
+.erro {
+    position: absolute;
+    border: 1px solid;
+    margin: 15px 0px;
+    padding:15px 20px 15px 55px;
+    width: 500px;	
+    font: bold 12px verdana;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px#888;
+    box-shadow: 0 0 5px #888;
+    text-shadow: 2px 2px 2px #ccc;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+
+    color: #D8000C;
+    background-color: #FFBABA;
+    left: 50px;
+    top: 200px;
+}
+/* Fim da página de home. */
+/* Inicio da página de novo comentário. */
+
+.painel_comentario{
+    top: 200px;
+}
+
+.painel_comentario fieldset label {
+    font-family: "museo-slab-1","museo-slab-2",serif;
+    font-size: 20px;
+    height: 9px;
+    left: 170px;
+    line-height: 70px;
+    opacity: 0.7;
+    position: absolute;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.painel_comentario textarea,
+.painel_comentario input[type=text]{
+    margin: 0 150px;
+}
+
+.go_comentario {
+    position: relative;
+    margin: auto;
+    top: 50px;
+    left: 330px;
+}
+
+.painel_comentario .erro{
+    top: 400px;
+    left: 125px;
+}
+/* Fim da página de novo comentario. */
+/* Inicio da página de listar */
+.listagem {
+    background: url("bg-white-fabric.png") repeat scroll 0 0 transparent;
+    padding: 30px 20px;
+    border: 1px solid white;
+    border-radius:5px;
+}
+
+h3 {
+    font-family: "museo-slab-1","museo-slab-2", serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: #2B8DC0;
+    display: block;
+    width: 500px;
+    margin:20px auto;
+}
+
+.comentarios {
+    width: auto;
+    margin: 10px auto;
+}
+
+ul.comentarios li span.dono{
+    display:block; 
+    font-family: "museo-500", "Helvetica", serif;
+    font-size: 20px;
+    font-weight:bold;
+    margin: 25px;
+    color: grey;
+}
+
+ul.comentarios li p {
+    text-indent: 10px;
+    margin: 20px;
+    font-family: "Helvetica", serif;
+    font-size: 20px;
+}
+/* Fim da página de listar */
