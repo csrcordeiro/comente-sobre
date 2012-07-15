@@ -1,0 +1,9 @@
+Para gerar um arquivo war para esta aplicação 
+basta instalar o maven2 em sua maquina e digitar o seguinte comando:
+
+mvn package
+
+Para gerar um banco de dados em memória com o HSQLDB é necessário instalar o HSQLDB na versão 2.2.8
+e rodar o seguinte comando no terminal:
+
+java -cp ../lib/hsqldb.jar org.hsqldb.server.Server --database.0 file:mydb --dbname.0 ComenteSobre
